@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+echo "bundle-audit $*" >> "${STUB_LOG}"
+exit "${STUB_EXIT:-0}"

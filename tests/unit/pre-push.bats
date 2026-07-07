@@ -28,6 +28,11 @@ run_cmd() {
     echo "$cmd" | grep -q "bundle exec bundle-audit"
 }
 
+@test "pre-push includes check --update flags" {
+    cmd=$(run_cmd)
+    echo "$cmd" | grep -q "check --update"
+}
+
 @test "pre-push has timeout" {
     timeout=$(awk '/^pre-push:/,/timeout:/' "$REPO_ROOT/lefthook-remote.yml" \
         | grep 'timeout:' | head -1 | sed 's/.*timeout: //')

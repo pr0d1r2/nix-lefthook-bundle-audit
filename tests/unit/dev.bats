@@ -54,3 +54,16 @@ teardown() {
     source "$TMPDIR/dev.sh"
     assert [ ! -f "$LEFTHOOK_LOG" ]
 }
+
+@test "skips lefthook install when HOME is not set" {
+    cd "$TMPDIR/repo"
+    rm "$TMPDIR/repo/.git/hooks/pre-commit"
+    # shellcheck disable=SC2031
+    export PATH="$TMPDIR/bin:$PATH"
+    # shellcheck disable=SC2031
+    export LEFTHOOK_LOG="$TMPDIR/log"
+    unset HOME
+    # shellcheck disable=SC1091
+    source "$TMPDIR/dev.sh"
+    assert [ ! -f "$LEFTHOOK_LOG" ]
+}

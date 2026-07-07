@@ -37,6 +37,9 @@ teardown() {
     export PATH="$TMPDIR/bin:$PATH"
     # shellcheck disable=SC2030
     export LEFTHOOK_LOG="$TMPDIR/log"
+    # shellcheck disable=SC2030
+    export HOME="$TMPDIR/home"
+    mkdir -p "$HOME"
     # shellcheck disable=SC1091
     source "$TMPDIR/dev.sh"
     assert [ -f "$LEFTHOOK_LOG" ]

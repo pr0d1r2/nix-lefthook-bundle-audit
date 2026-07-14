@@ -63,9 +63,10 @@ Exports BATS_LIB_PATH. Runs `lefthook install` when HOME is set and .git/hooks/p
 | id | date | cause | fix |
 |---|---|---|---|
 | B1 | 2026-07-07 | No .envrc in repo | Pending T1 |
-| B2 | 2026-07-07 | || true rationale undocumented | Pending README update |
+| B2 | 2026-07-07 | \|\| true rationale undocumented | Pending README update |
 | B3 | 2026-07-07 | Pre-push missing glob filter | Pending decision |
 | B4 | 2026-07-07 | Missing local linter hooks | Pending T2-T3 |
 | B5 | 2026-07-07 | PROMPT.md tracked in repo | Meta artifact |
 | B6 | 2026-07-07 | Shallow git history | Limits bisect/blame |
 | B7 | 2026-07-07 | CI: HOME unset by --ignore-environment; bats test assumed HOME set; SPEC.md had non-ASCII and exceeded size limit | Set HOME in test; trim SPEC.md |
+| B8 | 2026-07-14 | CI exit 127: lefthook.yml ran lefthook-markdownlint-agentic but flake never provided the binary; SPEC.md B2 row had unescaped pipes breaking markdownlint MD056 | Wire nix-lefthook-markdownlint-agentic-src into flake ciPackages; escape pipes in B2 |

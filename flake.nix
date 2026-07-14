@@ -21,6 +21,10 @@
       url = "github:pr0d1r2/nix-lefthook-commit-msg-lint";
       flake = false;
     };
+    nix-lefthook-markdownlint-agentic-src = {
+      url = "github:pr0d1r2/nix-lefthook-markdownlint-agentic";
+      flake = false;
+    };
   };
 
   outputs =
@@ -30,6 +34,7 @@
       nix-dev-shell-agentic,
       nix-lefthook-bats-unit-src,
       nix-lefthook-commit-msg-lint-src,
+      nix-lefthook-markdownlint-agentic-src,
       ...
     }@inputs:
     let
@@ -65,6 +70,15 @@
                   pkgs.gnused
                 ];
                 text = builtins.readFile "${nix-lefthook-commit-msg-lint-src}/lefthook-commit-msg-lint.sh";
+              })
+              (pkgs.writeShellApplication {
+                name = "lefthook-markdownlint-agentic";
+                runtimeInputs = [ pkgs.markdownlint-cli ];
+                text =
+                  builtins.replaceStrings
+                    [ "@MARKDOWNLINT_AGENTIC_CONFIG@" ]
+                    [ "${nix-lefthook-markdownlint-agentic-src}/.markdownlint-agentic.yml" ]
+                    (builtins.readFile "${nix-lefthook-markdownlint-agentic-src}/lefthook-markdownlint-agentic.sh");
               })
             ];
             shellHook = builtins.replaceStrings [ "@BATS_LIB_PATH@" ] [ "${shells.batsWithLibs}" ] (

@@ -5,7 +5,11 @@ setup() {
     load "${BATS_LIB_PATH}/bats-assert/load.bash"
     REPO_ROOT="$(cd "$BATS_TEST_DIRNAME/../.." && pwd)"
 
-    export PATH="$BATS_TEST_DIRNAME/stubs:$PATH"
+    STUBS="$BATS_TEST_TMPDIR/stubs"
+    mkdir -p "$STUBS"
+    cp "$BATS_TEST_DIRNAME"/stubs/* "$STUBS/"
+    chmod +x "$STUBS"/*
+    export PATH="$STUBS:$PATH"
     export STUB_LOG="$BATS_TEST_TMPDIR/stub.log"
 
     WORK="$BATS_TEST_TMPDIR/repo"

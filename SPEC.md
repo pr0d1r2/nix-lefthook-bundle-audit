@@ -17,7 +17,7 @@ Lefthook-compatible git hook running `bundle exec bundle-audit check --update` o
 9. Nix flake supports aarch64-darwin, x86_64-darwin, x86_64-linux, aarch64-linux.
 10. CI: ubuntu-latest always; macos-latest on push/workflow_dispatch only.
 11. YAML passes yamllint; EditorConfig enforced.
-12. File size limits: 4096 default, 131072 for .lock.
+12. File size limits: 4096 default, 524288 for .lock.
 13. Shell: no functions (modularity); no direct execution (noexec).
 
 ## I -- Interfaces
@@ -72,3 +72,4 @@ Exports BATS_LIB_PATH. Runs `lefthook install` when HOME is set and .git/hooks/p
 | B8 | 2026-07-14 | CI exit 127: lefthook.yml ran lefthook-markdownlint-agentic but flake never provided the binary; SPEC.md B2 row had unescaped pipes breaking markdownlint MD056 | Wire nix-lefthook-markdownlint-agentic-src into flake ciPackages; escape pipes in B2 |
 | B9 | 2026-07-20 | CI guardrails: confirm app missing fragment wrappers on PATH (coherence); unused flake inputs (deadnix); test stubs with execute bits (execute-permissions); embedded shell in confirm app (nix-no-embedded-shell) | Add mat.packages to confirm runtimeInputs; remove unused inputs; chmod -x stubs and copy+chmod in test setup; extract confirm shell to scripts/confirm-wrapper.sh via replaceVars |
 | B10 | 2026-07-28 | Pin refresh grew flake.lock beyond the 65536-byte lock-file limit | Raise the explicit .lock limit to 131072 bytes |
+| B11 | 2026-07-29 | Pin refresh grew flake.lock to 458311 bytes, beyond the 131072-byte lock-file limit | Raise the explicit .lock limit to 524288 bytes |

@@ -35,7 +35,11 @@ in
     in
     set-and-setting.lib.mkDevShells {
       inherit pkgs;
-      basePackages = mat.packages;
+      basePackages = mat.packages ++ [
+        pkgs.bats
+        pkgs.bats-support
+        pkgs.bats-assert
+      ];
       settingHook = ''
         ${self.packages.${sys}.setting}/bin/sync-setting .
         _assemble_out="$(mktemp -d)"

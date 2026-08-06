@@ -73,4 +73,5 @@ Exports BATS_LIB_PATH. Runs `lefthook install` when HOME is set and .git/hooks/p
 | B9 | 2026-07-20 | CI guardrails: confirm app missing fragment wrappers on PATH (coherence); unused flake inputs (deadnix); test stubs with execute bits (execute-permissions); embedded shell in confirm app (nix-no-embedded-shell) | Add mat.packages to confirm runtimeInputs; remove unused inputs; chmod -x stubs and copy+chmod in test setup; extract confirm shell to scripts/confirm-wrapper.sh via replaceVars |
 | B10 | 2026-07-28 | Pin refresh grew flake.lock beyond the 65536-byte lock-file limit | Raise the explicit .lock limit to 131072 bytes |
 | B11 | 2026-07-29 | Pin refresh grew flake.lock to 458311 bytes, beyond the 131072-byte lock-file limit | Raise the explicit .lock limit to 524288 bytes |
-| B12 | 2026-08-04 | flake-manifest strict check failed: outputs body used inline let with supportedSystems/forAllSystems/fragments | Extract outputs body to nix/outputs.nix; flake.nix delegates via import |
+| B12 | 2026-08-04 | flake-manifest check rejected inline outputs let | Extract outputs to nix/outputs.nix |
+| B13 | 2026-08-06 | CI lock-graph duplicated nixpkgs | Follow shared inputs |

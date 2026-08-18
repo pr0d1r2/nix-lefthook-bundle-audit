@@ -75,3 +75,4 @@ Exports BATS_LIB_PATH. Runs `lefthook install` when HOME is set and .git/hooks/p
 | B11 | 2026-07-29 | Pin refresh grew flake.lock to 458311 bytes, beyond the 131072-byte lock-file limit | Raise the explicit .lock limit to 524288 bytes |
 | B12 | 2026-08-04 | flake-manifest check rejected inline outputs let | Extract outputs to nix/outputs.nix |
 | B13 | 2026-08-06 | CI lock-graph duplicated nixpkgs | Follow shared inputs |
+| B14 | 2026-08-18 | CI guardrails fidelity: detected `actions` fragment was omitted from the flake fragment lists | Add `actions` to both fragment lists |

@@ -1,20 +1,20 @@
-# SPEC -- nix-lefthook-bundle-audit
+# SPEC
 
-## D -- Description
+## D
 
-Lefthook-compatible git hook running `bundle exec bundle-audit check --update` on pre-commit/pre-push. Distributed as `lefthook-remote.yml`. Built with Nix, tested with bats on Linux and macOS.
+Git hook running `bundle exec bundle-audit check --update` on pre-commit/pre-push. Distributed as `lefthook-remote.yml`. Built with Nix, tested with bats.
 
 ## V -- Invariants
 
-1. `lefthook-remote.yml` defines pre-commit and pre-push commands for bundle-audit.
+1. `lefthook-remote.yml` defines pre-commit/pre-push bundle-audit commands.
 2. Both hooks run `bundle exec bundle-audit check --update || true`.
 3. Pre-commit scopes to `{Gemfile,Gemfile.lock}` via glob.
-4. Both hooks have a timeout value.
+4. Both hooks have a timeout.
 5. `|| true` ensures hooks never block commits/pushes (advisory-only).
-6. All bats tests pass on Linux and macOS.
-7. Every implementation file has a 1-to-1 bats unit test.
-8. `dev.sh` exports BATS_LIB_PATH; runs `lefthook install` when HOME is set and hooks absent.
-9. Nix flake supports aarch64-darwin, x86_64-darwin, x86_64-linux, aarch64-linux.
+6. Bats tests pass on Linux and macOS.
+7. Every implementation file has a bats unit test.
+8. `dev.sh` exports BATS_LIB_PATH; runs `lefthook install` when HOME is set and hooks are absent.
+9. Flake supports aarch64-darwin, x86_64-darwin, x86_64-linux, aarch64-linux.
 10. CI: ubuntu-latest always; macos-latest on push/workflow_dispatch only.
 11. YAML passes yamllint; EditorConfig enforced.
 12. File size limits: 4096 default, 524288 for .lock.
@@ -32,18 +32,18 @@ Lefthook-compatible git hook running `bundle exec bundle-audit check --update` o
 
 ### flake.nix
 
-devShells.default and devShells.ci via nix-dev-shell-agentic. Shell hook is dev.sh with @BATS_LIB_PATH@ substituted.
+devShells.default and devShells.ci via nix-dev-shell-agentic. Hook is dev.sh with BATS_LIB_PATH substituted.
 
 ### dev.sh
 
-Exports BATS_LIB_PATH. Runs `lefthook install` when HOME is set and .git/hooks/pre-commit absent.
+Exports BATS_LIB_PATH. Runs `lefthook install` when HOME is set and pre-commit is absent.
 
 ### Environment variables
 
 | variable | purpose |
 |---|---|
-| BATS_LIB_PATH | path to bats support/assert libraries |
-| LEFTHOOK_EXECUTE_PERMISSIONS_ALLOWED | regex for allowed execute-bit paths |
+| BATS_LIB_PATH | bats support/assert library path |
+| LEFTHOOK_EXECUTE_PERMISSIONS_ALLOWED | allowed execute-bit path regex |
 
 ## T -- Tasks
 

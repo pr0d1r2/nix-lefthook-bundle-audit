@@ -21,5 +21,5 @@ setup() {
     [ "$(grep -Fc 'timeout: 60s' "$REPO_ROOT/lefthook-remote.yml")" -eq 2 ]
     run awk '/^pre-push:/,/^$/ { if ($1 == "glob:") found=1 } END { exit found }' \
         "$REPO_ROOT/lefthook-remote.yml"
-    assert_failure
+    assert_success
 }

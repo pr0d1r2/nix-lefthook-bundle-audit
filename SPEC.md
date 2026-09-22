@@ -68,10 +68,11 @@ Exports BATS_LIB_PATH. Runs `lefthook install` when HOME is set and .git/hooks/p
 | B4 | 2026-07-07 | Missing local linter hooks | Pending T2-T3 |
 | B5 | 2026-07-07 | PROMPT.md tracked in repo | Meta artifact |
 | B6 | 2026-07-07 | Shallow git history | Limits bisect/blame |
-| B7 | 2026-07-07 | CI: HOME unset by --ignore-environment; bats test assumed HOME set; SPEC.md had non-ASCII and exceeded size limit | Set HOME in test; trim SPEC.md |
-| B8 | 2026-07-14 | CI exit 127: lefthook.yml ran lefthook-markdownlint-agentic but flake never provided the binary; SPEC.md B2 row had unescaped pipes breaking markdownlint MD056 | Wire nix-lefthook-markdownlint-agentic-src into flake ciPackages; escape pipes in B2 |
-| B9 | 2026-07-20 | CI guardrails: confirm app missing fragment wrappers on PATH (coherence); unused flake inputs (deadnix); test stubs with execute bits (execute-permissions); embedded shell in confirm app (nix-no-embedded-shell) | Add mat.packages to confirm runtimeInputs; remove unused inputs; chmod -x stubs and copy+chmod in test setup; extract confirm shell to scripts/confirm-wrapper.sh via replaceVars |
+| B7 | 2026-07-07 | CI: HOME unset; Bats assumed it; SPEC.md exceeded size limit | Set HOME; trim SPEC.md |
+| B8 | 2026-07-14 | CI exit 127: missing markdownlint-agentic binary; B2 pipes broke MD056 | Wire binary; escape B2 pipes |
+| B9 | 2026-07-20 | CI guardrails: missing confirm wrappers; dead inputs; executable stubs; embedded shell | Add runtime inputs; remove inputs; fix stub modes; extract shell |
 | B10 | 2026-07-28 | Pin refresh grew flake.lock beyond the 65536-byte lock-file limit | Raise the explicit .lock limit to 131072 bytes |
-| B11 | 2026-07-29 | Pin refresh grew flake.lock to 458311 bytes, beyond the 131072-byte lock-file limit | Raise the explicit .lock limit to 524288 bytes |
+| B11 | 2026-07-29 | Pin refresh grew flake.lock to 458311 bytes | Raise .lock limit to 524288 bytes |
 | B12 | 2026-08-04 | flake-manifest check rejected inline outputs let | Extract outputs to nix/outputs.nix |
 | B13 | 2026-08-06 | CI lock-graph duplicated nixpkgs | Follow shared inputs |
+| B14 | 2026-09-22 | CI guardrails contract test used `exit found`, so awk returned success when the forbidden pre-push glob was absent | Use `exit !found` so the negative assertion has the intended status |
